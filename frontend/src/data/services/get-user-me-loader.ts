@@ -1,16 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getAuthToken } from "./get-token";
 import { getStrapiURL } from "@/lib/utils";
 
+/**
+ * The type definition for the return value of getUserMeLoader.
+ */
 type UserMeLoaderProps = {
-    ok: boolean;
-    data: unknown;
-    error: unknown | null;
-}
+  ok: boolean;
+  data: any;
+  error: any;
+};
+
 
 /**
- * Service function to fetch the current user's information from the Strapi API.
+ * A function to fetch the current user's information from the Strapi API.
  *
- * @returns {Promise<object>} - A promise that resolves to an object containing the server response
+ * @returns {Promise<UserMeLoaderProps>}
+ * - `ok`: A boolean indicating whether the request was successful.
+ * - `data`: The user's data if the request was successful, otherwise null.
+ * - `error`: An error object if the request failed, otherwise null.
  */
 export const getUserMeLoader = async (): Promise<UserMeLoaderProps> => {
   const baseUrl = getStrapiURL();

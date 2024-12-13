@@ -13,7 +13,7 @@ import { z } from "zod";
 export async function updateProfileAction(
   userId: string,
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) {
   const rawFormData = Object.fromEntries(formData);
 
@@ -30,7 +30,7 @@ export async function updateProfileAction(
   const responseData = await mutateData(
     "PUT",
     `/api/users/${userId}?${query}`,
-    payload
+    payload,
   );
 
   if (!responseData) {
@@ -79,7 +79,7 @@ const imageSchema = z.object({
 
     .refine(
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      ".jpg, .jpeg, .png and .webp files are accepted."
+      ".jpg, .jpeg, .png and .webp files are accepted.",
     )
     .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`),
 });
@@ -87,7 +87,7 @@ const imageSchema = z.object({
 export async function uploadProfileImageAction(
   imageId: string,
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) {
   // GET THE LOGGED IN USER
   const user = await getUserMeLoader();
@@ -155,7 +155,7 @@ export async function uploadProfileImageAction(
   const updateImageResponse = await mutateData(
     "PUT",
     `/api/users/${userId}`,
-    payload
+    payload,
   );
 
   revalidatePath("/dashboard/account");

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx}'",
+    "format:check": "prettier --check '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.0",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "@types/node": "^20",
     "@types/qs": "^6.9.17",
     "@types/react": "^19",
@@ -31,6 +34,10 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.0",
     "postcss": "^8",
+    "prettier": "^3.4.2",
+    "prettier-plugin-classnames": "^0.7.5",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

@@ -29,18 +29,16 @@ export const ProfileImageForm = ({
 }) => {
   const uploadProfileImageWithIdAction = uploadProfileImageAction.bind(
     null,
-    data?.id
+    data?.id,
   );
 
   const [formState, formAction] = useActionState(
     uploadProfileImageWithIdAction,
-    initialState
+    initialState,
   );
 
   return (
-    <form
-      className={cn("space-y-4", className)}
-      action={formAction}>
+    <form className={cn("space-y-4", className)} action={formAction}>
       <div className="">
         <ImagePicker
           id="image"
@@ -52,10 +50,7 @@ export const ProfileImageForm = ({
         <StrapiErrors error={formState?.strapiErrors} />
       </div>
       <div className="flex justify-end">
-        <SubmitButton
-          text="Update Image"
-          loadingText="Saving Image"
-        />
+        <SubmitButton text="Update Image" loadingText="Saving Image" />
       </div>
     </form>
   );

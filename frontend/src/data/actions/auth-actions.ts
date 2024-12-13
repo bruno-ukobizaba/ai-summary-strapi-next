@@ -37,7 +37,7 @@ const registerSchema = z.object({
  */
 export const registerUserAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<any> => {
   // Validate the form data using Zod schema
   const validatedFields = registerSchema.safeParse({
@@ -118,7 +118,7 @@ const loginSchema = z.object({
  */
 export const loginUserAction = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ): Promise<any> => {
   // Validate the form data using Zod schema
   const validatedFields = loginSchema.safeParse({

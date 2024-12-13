@@ -59,13 +59,11 @@ export const ProfileForm = ({
   const updateProfileWithId = updateProfileAction.bind(null, data.id);
   const [formState, formAction] = useActionState(
     updateProfileWithId,
-    INITIAL_STATE
+    INITIAL_STATE,
   );
 
   return (
-    <form
-      className={cn("space-y-4", className)}
-      action={formAction}>
+    <form className={cn("space-y-4", className)} action={formAction}>
       <div className="space-y-4 grid ">
         <div className="grid grid-cols-3 gap-4">
           <Input
@@ -109,10 +107,7 @@ export const ProfileForm = ({
         />
       </div>
       <div className="flex justify-end">
-        <SubmitButton
-          text="Update Profile"
-          loadingText="Saving Profile"
-        />
+        <SubmitButton text="Update Profile" loadingText="Saving Profile" />
       </div>
       <StrapiErrors error={formState?.strapiErrors} />
     </form>

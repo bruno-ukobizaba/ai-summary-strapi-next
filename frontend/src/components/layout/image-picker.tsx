@@ -80,7 +80,8 @@ const ImageCard = ({
       <button
         onClick={() => fileInput.current?.click()}
         className="w-full absolute inset-0"
-        type="button"></button>
+        type="button"
+      ></button>
     </div>
   );
 };

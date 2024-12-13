@@ -19,7 +19,7 @@ import { ZodErrors } from "@/components/layout/zod-errors";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const INITIAL_STATE = {
+const initialState = {
   zodErrors: null,
   strapiErrors: null,
   data: null,
@@ -27,10 +27,7 @@ const INITIAL_STATE = {
 };
 
 export const SigninForm = () => {
-  const [formState, formAction] = useActionState(
-    loginUserAction,
-    INITIAL_STATE
-  );
+  const [formState, formAction] = useActionState(loginUserAction, initialState);
   return (
     <div className="w-full max-w-md">
       <form action={formAction}>
@@ -74,9 +71,7 @@ export const SigninForm = () => {
         </Card>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?
-          <Link
-            className="underline ml-2"
-            href="signup">
+          <Link className="underline ml-2" href="signup">
             Sign Up
           </Link>
         </div>

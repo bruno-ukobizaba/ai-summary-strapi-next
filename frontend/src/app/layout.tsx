@@ -35,7 +35,8 @@ const RootLayout = async ({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <Header data={globalData.data.header} />
         {children}
         <Footer data={globalData.data.footer} />

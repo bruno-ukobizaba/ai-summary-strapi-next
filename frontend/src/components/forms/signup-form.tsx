@@ -20,14 +20,14 @@ import { Label } from "@/components/ui/label";
 import { StrapiErrors } from "@/components/layout/strapi-errors";
 import { ZodErrors } from "@/components/layout/zod-errors";
 
-const INITIAL_STATE = {
+const initialState = {
   data: null,
 };
 
 export const SignupForm = () => {
   const [formState, formAction] = useActionState(
     registerUserAction,
-    INITIAL_STATE
+    initialState,
   );
 
   return (
@@ -84,9 +84,7 @@ export const SignupForm = () => {
         </Card>
         <div className="mt-4 text-center text-sm">
           Have an account?
-          <Link
-            className="underline ml-2"
-            href="signin">
+          <Link className="underline ml-2" href="signin">
             Sign In
           </Link>
         </div>

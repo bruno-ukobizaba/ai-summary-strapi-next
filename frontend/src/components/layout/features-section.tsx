@@ -28,6 +28,14 @@ interface FeatureSectionProps {
   feature: FeatureProps[];
 }
 
+/**
+ * A functional component that renders a section displaying a list of features.
+ *
+ * @param data - An object containing the properties required for the features section,
+ *               including the title, description, and an array of feature objects.
+ * @returns A JSX element representing the features section, displaying each feature
+ *          with an icon, heading, and subheading.
+ */
 export const FeaturesSection = ({
   data,
 }: {
@@ -43,8 +51,7 @@ export const FeaturesSection = ({
             {feature.map((feature) => (
               <div
                 key={feature.id}
-                className="flex flex-col items-center text-center"
-              >
+                className="flex flex-col items-center text-center">
                 {getIcon(feature.icon)}
                 <h2 className="mb-4 text-2xl font-bold">{feature.heading}</h2>
                 <p className="text-gray-500">{feature.subHeading}</p>

@@ -3,20 +3,20 @@ import { getAuthToken } from "@/data/services/get-token";
 import { getStrapiURL } from "@/lib/utils";
 
 /**
- * Performs a mutation on the Strapi API.
+ * Makes a network request to the Strapi API with the specified HTTP method, path, and optional payload.
  *
- * @param {string} method - The HTTP method to use. e.g. "POST", "PUT", "DELETE"
- * @param {string} path - The path to the Strapi API endpoint.
- * @param {object} [payload] - The payload to send with the request.
+ * @param method - The HTTP method to use for the request (e.g., "GET", "POST", "PUT", "DELETE").
+ * @param path - The API endpoint path to which the request should be made.
+ * @param payload - Optional data to be sent with the request. This will be stringified to JSON if provided.
  *
- * @returns {Promise<object>} - A promise that resolves to the response data.
+ * @returns A promise that resolves to the response data from the API. For DELETE requests, it resolves to a boolean indicating the success status of the request.
  *
- * @throws {Error} - If there is an error making the request, or if the request fails.
+ * @throws Will throw an error if the authentication token is not found or if the network request fails.
  */
 export const mutateData = async (
   method: string,
   path: string,
-  payload?: any,
+  payload?: any
 ) => {
   const baseUrl = getStrapiURL();
   const authToken = await getAuthToken();

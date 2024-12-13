@@ -31,13 +31,16 @@ const registerSchema = z.object({
 /**
  * Server-side action function to handle user registration.
  *
- * @param {any} prevState - The previous state of the application
- * @param {FormData} formData - The form data containing user registration details
- * @returns {Promise<any>} - A promise that resolves to an object containing the updated state and relevant messages
+ * @param prevState - The previous state of the application
+ * @param formData - The form data containing user registration details
+ * @returns A promise that resolves to an object containing the updated state,
+ *          data, error messages, and a success message. If any error occurs
+ *          during the process, the corresponding error message will be
+ *          included in the returned object.
  */
 export const registerUserAction = async (
   prevState: any,
-  formData: FormData,
+  formData: FormData
 ): Promise<any> => {
   // Validate the form data using Zod schema
   const validatedFields = registerSchema.safeParse({
@@ -118,7 +121,7 @@ const loginSchema = z.object({
  */
 export const loginUserAction = async (
   prevState: any,
-  formData: FormData,
+  formData: FormData
 ): Promise<any> => {
   // Validate the form data using Zod schema
   const validatedFields = loginSchema.safeParse({

@@ -31,6 +31,7 @@ const config = {
     "prettier-plugin-organize-attributes",
     "prettier-plugin-tailwindcss",
     "prettier-plugin-classnames",
+    "prettier-plugin-merge",
   ],
   endingPosition: "absolute",
 };

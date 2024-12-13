@@ -1,10 +1,9 @@
 import { cookies } from "next/headers";
 
 /**
- * Retrieves the authentication token from the Next.js request cookies.
+ * Retrieves the authentication token from the cookies.
  *
- * @returns {Promise<string | undefined>} - A promise that resolves to the authentication token
- * stored in the "jwt" cookie. If the cookie is not found, the promise resolves to `undefined`.
+ * @returns A promise that resolves to the authentication token, or undefined if not found.
  */
 export const getAuthToken = async (): Promise<string | undefined> => {
   const cookieStore = await cookies();

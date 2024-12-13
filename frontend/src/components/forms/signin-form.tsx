@@ -26,6 +26,15 @@ const initialState = {
   message: "",
 };
 
+/**
+ * A functional component representing the sign-in form.
+ *
+ * This component allows users to sign in by entering their username or email
+ * and password. It utilizes the `useActionState` hook to manage form submission
+ * and state, and displays relevant error messages if validation fails.
+ *
+ * @returns A JSX element representing the sign-in form layout.
+ */
 export const SigninForm = () => {
   const [formState, formAction] = useActionState(loginUserAction, initialState);
   return (
@@ -71,7 +80,9 @@ export const SigninForm = () => {
         </Card>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?
-          <Link className="underline ml-2" href="signup">
+          <Link
+            className="underline ml-2"
+            href="signup">
             Sign Up
           </Link>
         </div>

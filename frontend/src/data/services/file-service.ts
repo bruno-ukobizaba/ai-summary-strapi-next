@@ -3,6 +3,13 @@ import { getAuthToken } from "@/data/services/get-token";
 import { mutateData } from "@/data/services/mutate-data";
 import { getStrapiURL } from "@/lib/utils";
 
+/**
+ * Deletes an image file from the Strapi server using the specified image ID.
+ *
+ * @param {string} imageId - The ID of the image to be deleted.
+ * @returns {Promise<boolean>} - A promise that resolves to a boolean indicating the success status of the deletion.
+ * @throws {Error} - Throws an error if no authentication token is found or if the deletion fails.
+ */
 export async function fileDeleteService(imageId: string) {
   const authToken = await getAuthToken();
   if (!authToken) throw new Error("No auth token found");
@@ -12,12 +19,11 @@ export async function fileDeleteService(imageId: string) {
 }
 
 /**
- * Uploads an image to the Strapi server.
+ * Uploads an image file to the Strapi server.
  *
- * @param image - The image file to be uploaded.
- * @returns A promise that resolves to the server response containing the uploaded file data.
- * @throws Will throw an error if the auth token is not found.
- * @throws Will throw the server error if the image upload fails.
+ * @param {any} image - The image file to be uploaded. Must be a File or Blob object.
+ * @returns {Promise<any>} - A promise that resolves to the server's response data after the image is uploaded.
+ * @throws {Error} - Throws an error if no authentication token is found or if the upload fails.
  */
 export async function fileUploadService(image: any) {
   const authToken = await getAuthToken();

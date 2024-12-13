@@ -13,12 +13,12 @@ type UserMeLoaderProps = {
 };
 
 /**
- * A function to fetch the current user's information from the Strapi API.
+ * Fetches the current user's data from Strapi.
  *
- * @returns {Promise<UserMeLoaderProps>}
- * - `ok`: A boolean indicating whether the request was successful.
- * - `data`: The user's data if the request was successful, otherwise null.
- * - `error`: An error object if the request failed, otherwise null.
+ * @returns An object with three properties: `ok` (a boolean indicating
+ *          whether the request was successful), `data` (the user's data, or
+ *          null if the request failed), and `error` (an error message, or
+ *          null if the request succeeded).
  */
 export const getUserMeLoader = async (): Promise<UserMeLoaderProps> => {
   const baseUrl = getStrapiURL();

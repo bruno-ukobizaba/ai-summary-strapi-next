@@ -14,25 +14,21 @@ const isProtectedRoute = (path: string): boolean => {
 };
 
 /**
- * Middleware function to handle authentication and authorization for protected routes.
+ * Redirects users to the sign-in page if they are not authenticated and
+ * try to access a protected route.
  *
- * @param {NextRequest} request - The incoming Next.js request
- * @returns {Promise<NextResponse>} - A promise that resolves to a Next.js response
+ * @param request - The NextRequest object.
+ * @returns NextResponse - The NextResponse object.
  */
 export const middleware = async (request: NextRequest) => {
-  // Fetch the current user data
   const user = await getUserMeLoader();
 
-  // Extract the current path from the request URL
   const currentPath = request.nextUrl.pathname;
 
-  // Check if the current path is a protected route and the user is not authenticated
   if (isProtectedRoute(currentPath) && user.ok === false) {
-    // Redirect the user to the sign-in page
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 
-  // If the user is authenticated or the current path is not a protected route, continue to the next middleware or route handler
   return NextResponse.next();
 };
 

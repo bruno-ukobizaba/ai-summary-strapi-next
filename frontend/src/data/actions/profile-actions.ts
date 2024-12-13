@@ -10,10 +10,19 @@ import { revalidatePath } from "next/cache";
 import qs from "qs";
 import { z } from "zod";
 
+/**
+ * Updates the profile details for a user.
+ *
+ * @param userId - The ID of the user whose profile is being updated.
+ * @param prevState - The current state of the component.
+ * @param formData - The form data containing the updated profile details.
+ * @returns An object containing the updated state of the component. If an error occurs,
+ *          includes relevant error messages and retains the previous state.
+ */
 export async function updateProfileAction(
   userId: string,
   prevState: any,
-  formData: FormData,
+  formData: FormData
 ) {
   const rawFormData = Object.fromEntries(formData);
 
@@ -30,7 +39,7 @@ export async function updateProfileAction(
   const responseData = await mutateData(
     "PUT",
     `/api/users/${userId}?${query}`,
-    payload,
+    payload
   );
 
   if (!responseData) {
@@ -79,15 +88,23 @@ const imageSchema = z.object({
 
     .refine(
       (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      ".jpg, .jpeg, .png and .webp files are accepted.",
+      ".jpg, .jpeg, .png and .webp files are accepted."
     )
     .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`),
 });
 
+/**
+ * Updates the profile image for a user.
+ *
+ * @param imageId The id of the current profile image.
+ * @param prevState The current state of the component.
+ * @param formData The form data containing the new image.
+ * @returns The updated state of the component.
+ */
 export async function uploadProfileImageAction(
   imageId: string,
   prevState: any,
-  formData: FormData,
+  formData: FormData
 ) {
   // GET THE LOGGED IN USER
   const user = await getUserMeLoader();
@@ -155,7 +172,7 @@ export async function uploadProfileImageAction(
   const updateImageResponse = await mutateData(
     "PUT",
     `/api/users/${userId}`,
-    payload,
+    payload
   );
 
   revalidatePath("/dashboard/account");

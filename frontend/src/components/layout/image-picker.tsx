@@ -15,11 +15,10 @@ interface ImagePickerProps {
 }
 
 /**
- * Generates a data URL from a given file.
+ * Converts a file to a data URL and triggers a callback with the resulting URL.
  *
  * @param file - The file to be converted into a data URL.
- * @param callback - A function that takes the generated data URL as an argument.
- *                  The callback is called once the data URL is generated.
+ * @param callback - A function to be called with the resulting data URL as a string.
  */
 const generateDataUrl = (file: File, callback: (imageUrl: string) => void) => {
   const reader = new FileReader();
@@ -30,10 +29,10 @@ const generateDataUrl = (file: File, callback: (imageUrl: string) => void) => {
 };
 
 /**
- * A functional component that renders an image preview using the provided data URL.
+ * A functional component that renders a preview of an image.
  *
- * @param dataUrl - A string representing the data URL of the image to be previewed.
- * @returns A JSX.Element that displays the image with a specific size and styling.
+ * @param dataUrl - The URL of the image to be displayed in the preview.
+ * @returns A JSX element containing the image rendered with specified dimensions and styling.
  */
 const ImagePreview = ({ dataUrl }: { readonly dataUrl: string }) => {
   return (
@@ -48,17 +47,12 @@ const ImagePreview = ({ dataUrl }: { readonly dataUrl: string }) => {
 };
 
 /**
- * A functional component that renders an image preview with an overlayed button.
- * The component expects a data URL for the image to be previewed and a React
- * reference to an input element of type file. The component displays the image
- * preview if the data URL is set, otherwise it displays a fallback message. The
- * button is always displayed and can be used to open the file input dialog to
- * select a new image.
+ * A functional component that displays an image preview within a card layout.
+ * If no image is selected, it shows a placeholder message.
  *
- * @param dataUrl - A string representing the data URL of the image to be previewed.
- * @param fileInput - A React reference to an input element of type file.
- *
- * @returns A JSX.Element that displays the image preview along with the button.
+ * @param dataUrl - The URL of the image to be displayed in the preview.
+ * @param fileInput - A ref to the file input element, allowing interaction for image selection.
+ * @returns A JSX element representing the image card with a preview and interaction capabilities.
  */
 const ImageCard = ({
   dataUrl,
@@ -67,11 +61,8 @@ const ImageCard = ({
   readonly dataUrl: string;
   readonly fileInput: React.RefObject<HTMLInputElement>;
 }) => {
-  const imagePreview = dataUrl ? (
-    <ImagePreview dataUrl={dataUrl} />
-  ) : (
-    <p>No image selected</p>
-  );
+  const imagePreview =
+    dataUrl ? <ImagePreview dataUrl={dataUrl} /> : <p>No image selected</p>;
   return (
     <div className="w-full relative">
       <div className=" flex items-center space-x-4 rounded-md border p-4">
@@ -80,22 +71,19 @@ const ImageCard = ({
       <button
         onClick={() => fileInput.current?.click()}
         className="w-full absolute inset-0"
-        type="button"
-      ></button>
+        type="button"></button>
     </div>
   );
 };
 
 /**
- * A functional component that renders a label and an input element of type file.
- * The file input element is hidden from view and is used to select a new image.
- * The component renders an ImageCard component that displays the selected image
- * (if any) and a button that can be used to select a new image.
+ * A functional component for selecting and previewing images.
  *
- * @param id - The id attribute for the input element of type file.
- * @param name - The name attribute for the input element of type file.
- * @param label - The label displayed next to the input element of type file.
- * @param defaultValue - The default data URL to display in the ImageCard.
+ * @param id - The unique identifier for the input element.
+ * @param name - The name attribute for the input element.
+ * @param label - The label displayed for the image input.
+ * @param defaultValue - An optional default URL for the image preview.
+ * @returns A JSX element that includes a hidden file input and an image preview card.
  */
 export const ImagePicker = ({
   id,

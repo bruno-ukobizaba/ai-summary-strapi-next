@@ -24,10 +24,20 @@ const initialState = {
   data: null,
 };
 
+/**
+ * A functional component representing the sign-up form.
+ *
+ * This component allows users to register by providing their username, email,
+ * and password. It utilizes the `useActionState` hook to manage form submission
+ * and state, and displays relevant error messages if validation fails. Upon
+ * successful registration, the form submits user data to create a new account.
+ *
+ * @returns A JSX element representing the sign-up form layout.
+ */
 export const SignupForm = () => {
   const [formState, formAction] = useActionState(
     registerUserAction,
-    initialState,
+    initialState
   );
 
   return (
@@ -84,7 +94,9 @@ export const SignupForm = () => {
         </Card>
         <div className="mt-4 text-center text-sm">
           Have an account?
-          <Link className="underline ml-2" href="signin">
+          <Link
+            className="underline ml-2"
+            href="signin">
             Sign In
           </Link>
         </div>

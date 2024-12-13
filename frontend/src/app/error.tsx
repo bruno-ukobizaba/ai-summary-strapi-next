@@ -2,6 +2,12 @@
 import { BugIcon } from "lucide-react";
 import { useEffect } from "react";
 
+/**
+ * A functional component that displays an error message page.
+ *
+ * @param error - An object containing the error details, including an optional digest.
+ * @returns A JSX element representing the error page with a message and icon.
+ */
 export default function Error({
   error,
 }: {

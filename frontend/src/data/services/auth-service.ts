@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
- 
+
 import { getStrapiURL } from "@/lib/utils";
 
 interface RegisterUserProps {
@@ -21,7 +21,9 @@ const baseUrl = getStrapiURL();
  * @param {RegisterUserProps} userData - The user data for registration
  * @returns {Promise<any>} - A promise that resolves to the server response
  */
-export const registerUserService = async (userData: RegisterUserProps): Promise<any> => {
+export const registerUserService = async (
+  userData: RegisterUserProps
+): Promise<any> => {
   const url = new URL("/api/auth/local/register", baseUrl);
 
   try {
@@ -40,14 +42,15 @@ export const registerUserService = async (userData: RegisterUserProps): Promise<
   }
 };
 
-
 /**
  * Service function to log in an existing user using the Strapi API.
  *
  * @param {LoginUserProps} userData - The user data for login
  * @returns {Promise<any>} - A promise that resolves to the server response
  */
-export const loginUserService = async (userData: LoginUserProps): Promise<any> => {
+export const loginUserService = async (
+  userData: LoginUserProps
+): Promise<any> => {
   const url = new URL("/api/auth/local", baseUrl);
 
   try {

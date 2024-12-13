@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { Logo } from "@/components/layout/logo";
+import { LogoutButton } from "@/components/layout/logout-button";
 import { Button } from "@/components/ui/button";
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
-import { LogoutButton } from "@/components/layout/logout-button";
+import Link from "next/link";
 
 interface HeaderProps {
   data: {

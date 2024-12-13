@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { getStrapiMedia } from "@/lib/utils";
+import Image from "next/image";
 
 interface StrapiImageProps {
   src: string;

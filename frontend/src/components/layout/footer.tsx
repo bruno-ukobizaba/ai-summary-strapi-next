@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { Logo } from "@/components/layout/logo";
 import { GithubIcon, TwitterIcon, YoutubeIcon } from "@/data/icons";
+import Link from "next/link";
 
 interface SocialLink {
   id: number;

@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { StrapiImage } from "@/components/strapi-image";
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
+import Link from "next/link";
 
 interface Image {
   id: number;

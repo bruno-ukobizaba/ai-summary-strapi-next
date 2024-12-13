@@ -1,23 +1,23 @@
 "use client";
 
+import { loginUserAction } from "@/data/actions/auth-actions";
 import Link from "next/link";
 import { useActionState } from "react";
-import { loginUserAction } from "@/data/actions/auth-actions";
 
 import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { ZodErrors } from "@/components/layout/zod-errors";
 import { StrapiErrors } from "@/components/layout/strapi-errors";
 import { SubmitButton } from "@/components/layout/submit-button";
+import { ZodErrors } from "@/components/layout/zod-errors";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const INITIAL_STATE = {
   zodErrors: null,
@@ -29,7 +29,7 @@ const INITIAL_STATE = {
 export const SigninForm = () => {
   const [formState, formAction] = useActionState(
     loginUserAction,
-    INITIAL_STATE,
+    INITIAL_STATE
   );
   return (
     <div className="w-full max-w-md">

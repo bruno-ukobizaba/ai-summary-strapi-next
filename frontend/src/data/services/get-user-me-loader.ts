@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getAuthToken } from "./get-token";
 import { getStrapiURL } from "@/lib/utils";
+import qs from "qs";
+import { getAuthToken } from "./get-token";
 
 /**
  * The type definition for the return value of getUserMeLoader.
@@ -10,7 +11,6 @@ type UserMeLoaderProps = {
   data: any;
   error: any;
 };
-
 
 /**
  * A function to fetch the current user's information from the Strapi API.
@@ -25,6 +25,10 @@ export const getUserMeLoader = async (): Promise<UserMeLoaderProps> => {
 
   const url = new URL("/api/users/me", baseUrl);
 
+  url.search = qs.stringify({
+    populate: "*",
+  });
+
   const authToken = await getAuthToken();
   if (!authToken) return { ok: false, data: null, error: null };
 
@@ -37,10 +41,13 @@ export const getUserMeLoader = async (): Promise<UserMeLoaderProps> => {
       },
     });
     const data = await response.json();
+
     if (data.error) return { ok: false, data: null, error: data.error };
+
     return { ok: true, data: data, error: null };
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching user's data:", error);
+
     return { ok: false, data: null, error: error };
   }
 };

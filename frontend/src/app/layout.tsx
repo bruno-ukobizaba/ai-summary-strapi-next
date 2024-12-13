@@ -1,8 +1,8 @@
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+import { getGlobalData, getGlobalPageMetadata } from "@/data/loaders";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { getGlobalData, getGlobalPageMetadata } from "@/data/loaders";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 // Define Google Fonts in local

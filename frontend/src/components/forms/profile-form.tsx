@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
+import { StrapiErrors } from "@/components/layout/strapi-errors";
+import { updateProfileAction } from "@/data/actions/profile-actions";
 import { cn } from "@/lib/utils";
 import { useActionState } from "react";
-import { updateProfileAction } from "@/data/actions/profile-actions";
-import { StrapiErrors } from "@/components/layout/strapi-errors";
 
 import { SubmitButton } from "@/components/layout/submit-button";
 import { Input } from "@/components/ui/input";
@@ -60,7 +59,7 @@ export const ProfileForm = ({
   const updateProfileWithId = updateProfileAction.bind(null, data.id);
   const [formState, formAction] = useActionState(
     updateProfileWithId,
-    INITIAL_STATE,
+    INITIAL_STATE
   );
 
   return (

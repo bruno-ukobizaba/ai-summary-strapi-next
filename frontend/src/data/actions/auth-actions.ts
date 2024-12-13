@@ -1,29 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
-import {z} from "zod";
-import { registerUserService, loginUserService } from "@/data/services/auth-service";
+import {
+  loginUserService,
+  registerUserService,
+} from "@/data/services/auth-service";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
 const config = {
-    maxAge: 60 * 60 * 24 * 7, // 7 days
-    path: "/",
-    domain: process.env.HOST ?? "localhost",
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-}
+  maxAge: 60 * 60 * 24 * 7, // 7 days
+  path: "/",
+  domain: process.env.HOST ?? "localhost",
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+};
 
 const registerSchema = z.object({
-    username: z.string().min(3).max(20, {
-        message: "Username must be between 3 and 30 characters"
-    }),
-    email: z.string().email({
-        message: "Please enter a valid email address"
-    }),
-    password: z.string().min(8).max(100, {
-        message: "Password must be between 8 and 100 characters"
-    }),
-  });
+  username: z.string().min(3).max(20, {
+    message: "Username must be between 3 and 30 characters",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address",
+  }),
+  password: z.string().min(8).max(100, {
+    message: "Password must be between 8 and 100 characters",
+  }),
+});
 
 /**
  * Server-side action function to handle user registration.
@@ -32,7 +35,10 @@ const registerSchema = z.object({
  * @param {FormData} formData - The form data containing user registration details
  * @returns {Promise<any>} - A promise that resolves to an object containing the updated state and relevant messages
  */
-export const registerUserAction = async (prevState: any, formData: FormData): Promise<any> => {
+export const registerUserAction = async (
+  prevState: any,
+  formData: FormData
+): Promise<any> => {
   // Validate the form data using Zod schema
   const validatedFields = registerSchema.safeParse({
     username: formData.get("username"),
@@ -64,7 +70,11 @@ export const registerUserAction = async (prevState: any, formData: FormData): Pr
   }
 
   // Handle registration errors
-  if (responseData && typeof responseData === 'object' && 'error' in responseData) {
+  if (
+    responseData &&
+    typeof responseData === "object" &&
+    "error" in responseData
+  ) {
     return {
       ...prevState,
       strapiErrors: responseData.error,
@@ -81,16 +91,22 @@ export const registerUserAction = async (prevState: any, formData: FormData): Pr
 };
 
 const loginSchema = z.object({
-  identifier: z.string().min(3, {
-    message: "Username or email must be between 3 and 30 characters"
-  }).max(20, {
-    message: "Username or email must be between 3 and 20 characters"
-  }),
-  password: z.string().min(8, {
-    message: "Password must be between 8 and 100 characters"
-  }).max(100, {
-    message: "Password must be between 8 and 100 characters"
-  })
+  identifier: z
+    .string()
+    .min(3, {
+      message: "Username or email must be between 3 and 30 characters",
+    })
+    .max(20, {
+      message: "Username or email must be between 3 and 20 characters",
+    }),
+  password: z
+    .string()
+    .min(8, {
+      message: "Password must be between 8 and 100 characters",
+    })
+    .max(100, {
+      message: "Password must be between 8 and 100 characters",
+    }),
 });
 
 /**
@@ -100,7 +116,10 @@ const loginSchema = z.object({
  * @param {FormData} formData - The form data containing user login details
  * @returns {Promise<any>} - A promise that resolves to an object containing the updated state and relevant messages
  */
-export const loginUserAction = async (prevState: any, formData: FormData): Promise<any> => {
+export const loginUserAction = async (
+  prevState: any,
+  formData: FormData
+): Promise<any> => {
   // Validate the form data using Zod schema
   const validatedFields = loginSchema.safeParse({
     identifier: formData.get("identifier"),
@@ -131,7 +150,11 @@ export const loginUserAction = async (prevState: any, formData: FormData): Promi
   }
 
   // Handle server errors
-  if (responseData && typeof responseData === 'object' && 'error' in responseData) {
+  if (
+    responseData &&
+    typeof responseData === "object" &&
+    "error" in responseData
+  ) {
     return {
       ...prevState,
       strapiErrors: responseData.error,
@@ -142,7 +165,7 @@ export const loginUserAction = async (prevState: any, formData: FormData): Promi
 
   // Set the JWT cookie and redirect the user to the dashboard
   const cookieStore = await cookies();
-    cookieStore.set("jwt", responseData.jwt as string, config);
+  cookieStore.set("jwt", responseData.jwt as string, config);
 
   redirect("/dashboard");
 };
@@ -154,7 +177,7 @@ export const loginUserAction = async (prevState: any, formData: FormData): Promi
  */
 export const logoutUserAction = async (): Promise<void> => {
   const cookieStore = await cookies();
-  cookieStore.set("jwt", "", {...config, maxAge: 0});
+  cookieStore.set("jwt", "", { ...config, maxAge: 0 });
 
   redirect("/");
 };

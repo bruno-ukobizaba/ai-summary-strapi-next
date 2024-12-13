@@ -1,24 +1,24 @@
 "use client";
 
+import { SubmitButton } from "@/components/layout/submit-button";
+import { registerUserAction } from "@/data/actions/auth-actions";
 import Link from "next/link";
 import { useActionState } from "react";
-import { registerUserAction } from "@/data/actions/auth-actions";
-import { SubmitButton } from "@/components/layout/submit-button";
 
 import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-import { ZodErrors } from "@/components/layout/zod-errors";
 import { StrapiErrors } from "@/components/layout/strapi-errors";
+import { ZodErrors } from "@/components/layout/zod-errors";
 
 const INITIAL_STATE = {
   data: null,
@@ -27,7 +27,7 @@ const INITIAL_STATE = {
 export const SignupForm = () => {
   const [formState, formAction] = useActionState(
     registerUserAction,
-    INITIAL_STATE,
+    INITIAL_STATE
   );
 
   return (

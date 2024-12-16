@@ -51,7 +51,8 @@ export const FeaturesSection = ({
             {feature.map((feature) => (
               <div
                 key={feature.id}
-                className="flex flex-col items-center text-center">
+                className="flex flex-col items-center text-center"
+              >
                 {getIcon(feature.icon)}
                 <h2 className="mb-4 text-2xl font-bold">{feature.heading}</h2>
                 <p className="text-gray-500">{feature.subHeading}</p>

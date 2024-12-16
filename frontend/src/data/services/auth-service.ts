@@ -22,7 +22,7 @@ const baseUrl = getStrapiURL();
  * @returns {Promise<any>} - A promise that resolves to the server response
  */
 export const registerUserService = async (
-  userData: RegisterUserProps
+  userData: RegisterUserProps,
 ): Promise<any> => {
   const url = new URL("/api/auth/local/register", baseUrl);
 
@@ -49,7 +49,7 @@ export const registerUserService = async (
  * @returns {Promise<any>} - A promise that resolves to the server response
  */
 export const loginUserService = async (
-  userData: LoginUserProps
+  userData: LoginUserProps,
 ): Promise<any> => {
   const url = new URL("/api/auth/local", baseUrl);
 

@@ -61,8 +61,11 @@ const ImageCard = ({
   readonly dataUrl: string;
   readonly fileInput: React.RefObject<HTMLInputElement>;
 }) => {
-  const imagePreview =
-    dataUrl ? <ImagePreview dataUrl={dataUrl} /> : <p>No image selected</p>;
+  const imagePreview = dataUrl ? (
+    <ImagePreview dataUrl={dataUrl} />
+  ) : (
+    <p>No image selected</p>
+  );
   return (
     <div className="w-full relative">
       <div className=" flex items-center space-x-4 rounded-md border p-4">
@@ -71,7 +74,8 @@ const ImageCard = ({
       <button
         onClick={() => fileInput.current?.click()}
         className="w-full absolute inset-0"
-        type="button"></button>
+        type="button"
+      ></button>
     </div>
   );
 };

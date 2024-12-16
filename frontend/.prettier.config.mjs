@@ -28,10 +28,10 @@ const config = {
   importOrderSortSpecifiers: true,
   plugins: [
     "@trivago/prettier-plugin-sort-imports",
-    "prettier-plugin-organize-attributes",
+    // "prettier-plugin-organize-attributes",
     "prettier-plugin-tailwindcss",
-    "prettier-plugin-classnames",
-    "prettier-plugin-merge",
+    // "prettier-plugin-classnames",
+    // "prettier-plugin-merge",
   ],
   endingPosition: "absolute",
 };

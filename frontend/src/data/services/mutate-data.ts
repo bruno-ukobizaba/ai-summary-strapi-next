@@ -16,7 +16,7 @@ import { getStrapiURL } from "@/lib/utils";
 export const mutateData = async (
   method: string,
   path: string,
-  payload?: any
+  payload?: any,
 ) => {
   const baseUrl = getStrapiURL();
   const authToken = await getAuthToken();

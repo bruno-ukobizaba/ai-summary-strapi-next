@@ -1,10 +1,10 @@
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { Toaster } from "@/components/ui/sonner";
 import { getGlobalData, getGlobalPageMetadata } from "@/data/loaders";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
 // Define Google Fonts in local
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +55,7 @@ const RootLayout = async ({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Toaster position="bottom-center" />
         <Header data={globalData.data.header} />
         {children}
         <Footer data={globalData.data.footer} />

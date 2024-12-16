@@ -3,7 +3,7 @@ import { LogoutButton } from "@/components/layout/logout-button";
 import { Button } from "@/components/ui/button";
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 import Link from "next/link";
-import SummaryForm from "../forms/summary-form";
+import { SummaryForm } from "../forms/summary-form";
 
 interface HeaderProps {
   data: {

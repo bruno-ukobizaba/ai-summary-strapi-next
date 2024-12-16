@@ -1,5 +1,6 @@
 import { getStrapiURL } from "@/lib/utils";
 import qs from "qs";
+import { getAuthToken } from "./services/get-token";
 
 /**
  * Define the base URL for the Strapi CMS.
@@ -13,7 +14,7 @@ const baseUrl = getStrapiURL();
  * @returns A Promise that resolves to the fetched data.
  */
 const fetchData = async (url: string) => {
-  const authToken = process.env.STRAPI_API_TOKEN;
+  const authToken = await getAuthToken();
   const headers = {
     method: "GET",
     headers: {
@@ -117,3 +118,8 @@ export const getGlobalPageMetadata = async () => {
 
   return await fetchData(url.href);
 };
+
+export async function getSummaries() {
+  const url = new URL("/api/summaries", baseUrl);
+  return await fetchData(url.href);
+}

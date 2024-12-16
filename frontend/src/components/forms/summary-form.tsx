@@ -1,28 +1,31 @@
 "use client";
 
-import { SubmitButton } from "@/components/layout/submit-button";
-import { Input } from "@/components/ui/input";
-import { generateSummaryService } from "@/data/services/summary-service";
 import { cn, extractYoutubeVideoId } from "@/lib/utils";
 import { useState } from "react";
 import { toast } from "sonner";
+
+import { SubmitButton } from "@/components/layout/submit-button";
+import { Input } from "@/components/ui/input";
+
+import { createSummaryAction } from "@/data/actions/summary-actions";
+import { generateSummaryService } from "@/data/services/summary-service";
 
 interface StrapiErrorsProps {
   message: string | null;
   name: string;
 }
 
-const initialState = {
+const INITIAL_STATE = {
   message: null,
   name: "",
 };
 
-const SummaryForm = () => {
+export const SummaryForm = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<StrapiErrorsProps>(initialState);
+  const [error, setError] = useState<StrapiErrorsProps>(INITIAL_STATE);
   const [value, setValue] = useState<string>("");
 
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  async function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
 
@@ -32,40 +35,70 @@ const SummaryForm = () => {
     const processedVideoId = extractYoutubeVideoId(videoId);
 
     if (!processedVideoId) {
-      toast.error("Invalid YouTube video ID or URL");
+      toast.error("Invalid Youtube Video ID");
       setLoading(false);
       setValue("");
       setError({
-        ...initialState,
-        message: "Invalid YouTube video ID or URL",
+        ...INITIAL_STATE,
+        message: "Invalid Youtube Video ID",
         name: "Invalid Id",
       });
       return;
     }
 
-    toast.success("Generating summary...");
+    toast.success("Generating Summary");
 
     const summaryResponseData = await generateSummaryService(processedVideoId);
-    console.log(summaryResponseData, "Response from route handler");
 
     if (summaryResponseData.error) {
-      toast.error(summaryResponseData.error);
-      setLoading(false);
       setValue("");
+      toast.error(summaryResponseData.error);
       setError({
-        ...initialState,
+        ...INITIAL_STATE,
         message: summaryResponseData.error,
         name: "Summary Error",
       });
+      setLoading(false);
       return;
     }
 
-    toast.success("Summary generated successfully!");
+    const payload = {
+      data: {
+        title: `Summary for video: ${processedVideoId}`,
+        videoId: processedVideoId,
+        summary: summaryResponseData.data,
+      },
+    };
+
+    try {
+      await createSummaryAction(payload);
+      toast.success("Summary Created");
+      // Reset form after successful creation
+      setValue("");
+      setError(INITIAL_STATE);
+    } catch (error) {
+      let errorMessage =
+        "An unexpected error occurred while creating the summary";
+
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
+
+      toast.error(errorMessage);
+      setError({
+        message: errorMessage,
+        name: "Summary Error",
+      });
+      setLoading(false);
+      return;
+    }
     setLoading(false);
-  };
+  }
 
   const clearError = () => {
-    setError(initialState);
+    setError(INITIAL_STATE);
     if (error.message) setValue("");
   };
 
@@ -103,5 +136,3 @@ const SummaryForm = () => {
     </div>
   );
 };
-
-export default SummaryForm;

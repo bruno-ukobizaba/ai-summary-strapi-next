@@ -1,5 +1,11 @@
-/// import { updateSummaryAction, deleteSummaryAction } from "@/data/actions/summary-actions";
+"use client";
+
+import {
+  deleteSummaryAction,
+  updateSummaryAction,
+} from "@/data/actions/summary-actions";
 import { cn } from "@/lib/utils";
+import { useActionState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -14,9 +20,16 @@ import {
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { DeleteButton } from "@/components/layout/delete-button";
 import { SubmitButton } from "@/components/layout/submit-button";
 import ReactMarkdown from "react-markdown";
-// import { DeleteButton } from "@/components/layout/delete-button";
+import { StrapiErrors } from "../layout/strapi-errors";
+
+const initialState = {
+  strapiErrors: null,
+  data: null,
+  message: null,
+};
 
 /**
  * A component that renders a summary card form, which is used to update
@@ -41,7 +54,16 @@ export const SummaryCardForm = ({
   readonly item: any;
   readonly className?: string;
 }) => {
-  // const deleteSummaryById = deleteSummaryAction.bind(null, item.documentId);
+  const deleteSummaryById = deleteSummaryAction.bind(null, item.documentId);
+  const [deleteState, deleteAction] = useActionState(
+    deleteSummaryById,
+    initialState
+  );
+
+  const [updateState, updateAction] = useActionState(
+    updateSummaryAction,
+    initialState
+  );
 
   return (
     <Card className={cn("mb-8 relative h-auto", className)}>
@@ -50,7 +72,7 @@ export const SummaryCardForm = ({
       </CardHeader>
       <CardContent>
         <div>
-          <form>
+          <form action={updateAction}>
             <Input
               id="title"
               name="title"
@@ -132,12 +154,16 @@ export const SummaryCardForm = ({
               loadingText="Updating Summary"
             />
           </form>
-          <form>
-            {/* <DeleteButton className="absolute right-4 top-4 bg-red-700 hover:bg-red-600" /> */}
+          <form action={deleteAction}>
+            <DeleteButton className="absolute right-4 top-4 bg-red-700 hover:bg-red-600" />
           </form>
         </div>
       </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter>
+        <StrapiErrors
+          error={deleteState?.strapiErrors || updateState?.strapiErrors}
+        />
+      </CardFooter>
     </Card>
   );
 };

@@ -11,10 +11,11 @@
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
-    "@langchain/core": "^0.3.23",
+    "@langchain/core": "^0.3.24",
     "@langchain/openai": "^0.3.14",
     "@radix-ui/react-label": "^2.1.0",
-    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.2",
     "@tailwindcss/typography": "^0.5.15",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -26,9 +27,11 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.0.1",
+    "react-player": "^2.16.0",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "use-debounce": "^10.0.4",
     "zod": "^3.24.1"
   },
   "devDependencies": {

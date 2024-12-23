@@ -20,6 +20,16 @@ interface PaginationArrowProps {
   isDisabled: boolean;
 }
 
+/**
+ * A pagination arrow component that displays a left or right arrow.
+ *
+ * @param {{ direction: "left" | "right", href: string, isDisabled: boolean }} props
+ * The component props.
+ * @param {string} props.direction - The direction of the arrow.
+ * @param {string} props.href - The href attribute of the underlying anchor element.
+ * @param {boolean} props.isDisabled - Whether the button is disabled.
+ * @returns The pagination arrow component.
+ */
 const PaginationArrow: FC<PaginationArrowProps> = ({
   direction,
   href,
@@ -40,7 +50,27 @@ const PaginationArrow: FC<PaginationArrowProps> = ({
   );
 };
 
-export function PaginationComponent({ pageCount }: Readonly<PaginationProps>) {
+/**
+ * A pagination component that displays navigation controls for multiple pages.
+ *
+ * @component
+ * @param {object} props - The component props
+ * @param {number} props.pageCount - The total number of pages
+ *
+ * @example
+ * ```tsx
+ * <PaginationComponent pageCount={5} />
+ * ```
+ *
+ * The component uses URL search parameters to manage the current page state.
+ * It displays the current page number and provides navigation arrows to move
+ * between pages. The arrows are disabled when at the first or last page.
+ *
+ * @returns A pagination interface with previous/next arrows and current page display
+ */
+export const PaginationComponent = ({
+  pageCount,
+}: Readonly<PaginationProps>) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get("page")) || 1;
@@ -76,4 +106,4 @@ export function PaginationComponent({ pageCount }: Readonly<PaginationProps>) {
       </PaginationContent>
     </Pagination>
   );
-}
+};

@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_components_services",
+  "info": {
+    "displayName": "Service",
+    "description": "Individual service offering"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "CODE_ICON",
+        "GLOBE_ICON",
+        "SHIELD_ICON",
+        "CHART_ICON",
+        "USERS_ICON",
+        "SETTINGS_ICON"
+      ]
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "components.link"
+    }
+  }
+}

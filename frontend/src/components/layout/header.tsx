@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
 import Link from "next/link";
 import { SummaryForm } from "../forms/summary-form";
+import { LanguageSwitcher } from "./language-switcher";
 
 interface HeaderProps {
   data: {
@@ -25,12 +26,6 @@ interface AuthUserProps {
   email: string;
 }
 
-/**
- * A functional component representing the logged-in user.
- *
- * @param userData - The data of the logged-in user.
- * @returns - A JSX element representing the logged-in user.
- */
 export const LoggedInUser = ({
   userData,
 }: {
@@ -48,12 +43,6 @@ export const LoggedInUser = ({
   );
 };
 
-/**
- * A functional component representing the header of the application.
- *
- * @param data - The data required to render the header.
- * @returns - A JSX element representing the header.
- */
 export const Header = async ({ data }: Readonly<HeaderProps>) => {
   const { logoText, ctaButton } = data;
   const user = await getUserMeLoader();
@@ -63,6 +52,7 @@ export const Header = async ({ data }: Readonly<HeaderProps>) => {
       <Logo text={logoText.text} />
       {user.ok && <SummaryForm />}
       <div className="flex items-center gap-4">
+        <LanguageSwitcher />
         {user.ok ?
           <LoggedInUser userData={user.data} />
         : <Link href={ctaButton.url}>

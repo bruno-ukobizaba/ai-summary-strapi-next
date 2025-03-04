@@ -18,6 +18,11 @@
       "type": "component",
       "repeatable": true,
       "component": "components.link"
+    },
+    "legalLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.link"
     }
   }
 }

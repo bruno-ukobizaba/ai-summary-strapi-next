@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_layout_faq_sections",
+  "info": {
+    "displayName": "FAQ Section",
+    "description": "A section displaying frequently asked questions"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "faqs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.faq-item",
+      "required": true,
+      "min": 1
+    }
+  }
+}

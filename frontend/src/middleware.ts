@@ -1,6 +1,6 @@
 import { getUserMeLoader } from "@/data/services/get-user-me-loader";
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { locales } from "../navigation";
 
 // Define an array of protected routes
 const protectedRoutes = [
@@ -14,34 +14,49 @@ const isProtectedRoute = (path: string): boolean => {
 };
 
 /**
- * Redirects users to the sign-in page if they are not authenticated and
- * try to access a protected route.
+ * Auth middleware function that handles authentication for protected routes.
+ * It checks if the user is authenticated for protected routes and redirects
+ * to the sign-in page if not.
+ *
+ * This middleware is applied after the locale middleware in the root middleware.ts file.
  *
  * @param request - The NextRequest object.
- * @returns NextResponse - The NextResponse object.
+ * @returns NextResponse - The NextResponse object or undefined to continue.
  */
-export const middleware = async (request: NextRequest) => {
-  const user = await getUserMeLoader();
+export async function authMiddleware(request: NextRequest) {
+  // Get the pathname from the URL
+  const pathname = request.nextUrl.pathname;
 
-  const currentPath = request.nextUrl.pathname;
+  // Extract the locale from the pathname
+  const pathnameWithoutLocale = pathname.replace(/^\/[^\/]+/, "");
 
-  if (isProtectedRoute(currentPath) && user.ok === false) {
-    return NextResponse.redirect(new URL("/signin", request.url));
+  // Check if the route is protected
+  if (isProtectedRoute(pathnameWithoutLocale)) {
+    const user = await getUserMeLoader();
+
+    // If the user is not authenticated, redirect to the sign-in page
+    if (user.ok === false) {
+      // Get the current locale from the pathname or use the default
+      const locale =
+        locales.find(
+          (locale) =>
+            pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+        ) || "en";
+
+      // Create the sign-in URL with the correct locale prefix
+      const signInUrl = new URL(`/${locale}/signin`, request.url);
+      return NextResponse.redirect(signInUrl);
+    }
   }
 
+  // Continue with the request
   return NextResponse.next();
-};
+}
 
-// Optionally, you can add a matcher to optimize performance
-export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
-  ],
-};
+// Export a default middleware function to satisfy Next.js requirements
+export default async function middleware(request: NextRequest) {
+  // This middleware is not directly used by Next.js anymore.
+  // The functionality has been moved to the root middleware.ts file.
+  // But we need to export a middleware function to satisfy Next.js requirements.
+  return NextResponse.next();
+}

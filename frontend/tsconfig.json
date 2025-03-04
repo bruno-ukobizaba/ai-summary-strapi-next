@@ -18,6 +18,8 @@
         "name": "next"
       }
     ],
+    "allowSyntheticDefaultImports": true,
+    "types": ["next", "next/types", "next/types/global", "jest", "next-intl"],
     "paths": {
       "@/*": ["./src/*"]
     }

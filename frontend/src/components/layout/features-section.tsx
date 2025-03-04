@@ -3,11 +3,11 @@ import { CheckIcon, ClockIcon, CloudIcon } from "lucide-react";
 const getIcon = (name: string) => {
   switch (name) {
     case "CLOCK_ICON":
-      return <ClockIcon className="w-12 h-12 mb-4 text-gray-900" />;
+      return <ClockIcon className="w-12 h-12 mb-4 text-blue-600" />;
     case "CHECK_ICON":
-      return <CheckIcon className="w-12 h-12 mb-4 text-gray-900" />;
+      return <CheckIcon className="w-12 h-12 mb-4 text-blue-600" />;
     case "CLOUD_ICON":
-      return <CloudIcon className="w-12 h-12 mb-4 text-gray-900" />;
+      return <CloudIcon className="w-12 h-12 mb-4 text-blue-600" />;
     default:
       return null;
   }
@@ -41,26 +41,32 @@ export const FeaturesSection = ({
 }: {
   readonly data: FeatureSectionProps;
 }) => {
-  const { feature } = data;
+  const { title, description, feature } = data;
 
   return (
-    <div className="">
-      <div className="flex-1">
-        <section className="container px-4 py-6 mx-auto md:px-6 lg:py-24">
-          <div className="grid gap-8 md:grid-cols-3">
-            {feature.map((feature) => (
-              <div
-                key={feature.id}
-                className="flex flex-col items-center text-center"
-              >
-                {getIcon(feature.icon)}
-                <h2 className="mb-4 text-2xl font-bold">{feature.heading}</h2>
-                <p className="text-gray-500">{feature.subHeading}</p>
+    <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+      <div className="container px-4 mx-auto md:px-6">
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4">{title}</h2>
+          <p className="text-gray-600">{description}</p>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-3">
+          {feature.map((feature) => (
+            <div
+              key={feature.id}
+              className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              <div className="flex flex-col items-center text-center">
+                <div className="bg-blue-50 p-3 rounded-full mb-4">
+                  {getIcon(feature.icon)}
+                </div>
+                <h3 className="mb-3 text-xl font-bold">{feature.heading}</h3>
+                <p className="text-gray-600">{feature.subHeading}</p>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

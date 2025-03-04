@@ -1,0 +1,11 @@
+{
+  "Home": {
+    "title": "AI Video Summarizer",
+    "description": "Transform long videos into concise summaries with AI"
+  },
+  "Common": {
+    "language": "Language",
+    "english": "English",
+    "french": "French"
+  }
+}

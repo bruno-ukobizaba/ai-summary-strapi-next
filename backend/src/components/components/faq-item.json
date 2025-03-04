@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_components_faq_items",
+  "info": {
+    "displayName": "FAQ Item",
+    "description": "A frequently asked question and its answer"
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "string",
+      "required": true
+    },
+    "answer": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

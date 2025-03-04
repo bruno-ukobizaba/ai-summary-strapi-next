@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_layout_testimonials_sections",
+  "info": {
+    "displayName": "Testimonials Section",
+    "description": "A section displaying customer testimonials"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "testimonials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "components.testimonial",
+      "required": true,
+      "min": 1
+    }
+  }
+}

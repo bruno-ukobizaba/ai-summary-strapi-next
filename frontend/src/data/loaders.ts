@@ -25,11 +25,29 @@ const fetchData = async (url: string) => {
 
   try {
     const response = await fetch(url, authToken ? headers : {});
+
+    if (!response.ok) {
+      console.error(
+        `Error fetching data: ${response.status} ${response.statusText}`
+      );
+      return {
+        data: null,
+        error: `API error: ${response.status} ${response.statusText}`,
+      };
+    }
+
     const data = await response.json();
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
-    throw error;
+    // Return a default empty response with a more descriptive error message
+    return {
+      data: null,
+      error:
+        error instanceof Error ?
+          `Failed to connect to backend: ${error.message}`
+        : "Failed to connect to backend",
+    };
   }
 };
 
@@ -62,20 +80,20 @@ export const getHomePageData = async () => {
               },
             },
           },
-          // "layout.testimonials-section": {
-          //     populate: {
-          //         testimonial: {
-          //             populate: true,
-          //         },
-          //     },
-          // },
-          // "layout.contact-section": {
-          //     populate: {
-          //         form: {
-          //             populate: true,
-          //         },
-          //     },
-          // }
+          "layout.testimonials-section": {
+            populate: {
+              testimonials: {
+                populate: ["avatar"],
+              },
+            },
+          },
+          "layout.faq-section": {
+            populate: {
+              faqs: {
+                populate: true,
+              },
+            },
+          },
         },
       },
     },

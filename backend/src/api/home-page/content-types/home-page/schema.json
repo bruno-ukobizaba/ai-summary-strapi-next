@@ -41,7 +41,10 @@
       "type": "dynamiczone",
       "components": [
         "layout.hero-section",
-        "layout.features-section"
+        "layout.features-section",
+        "layout.testimonials-section",
+        "layout.faq-section",
+        "layout.services-section"
       ]
     }
   }

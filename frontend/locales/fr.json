@@ -1,0 +1,11 @@
+{
+  "Home": {
+    "title": "Résumé vidéo par IA",
+    "description": "Transformez de longues vidéos en résumés concis avec l'IA"
+  },
+  "Common": {
+    "language": "Langue",
+    "english": "Anglais",
+    "french": "Français"
+  }
+}

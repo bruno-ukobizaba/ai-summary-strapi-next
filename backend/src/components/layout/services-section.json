@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_layout_services_sections",
+  "info": {
+    "displayName": "Services Section",
+    "description": "A section to showcase the services offered"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "services": {
+      "displayName": "Service",
+      "type": "component",
+      "repeatable": true,
+      "component": "components.service"
+    }
+  }
+}

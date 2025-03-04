@@ -11,6 +11,7 @@
     "format:check": "prettier --check '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.6.0",
     "@langchain/core": "^0.3.24",
     "@langchain/openai": "^0.3.14",
     "@radix-ui/react-label": "^2.1.0",
@@ -20,7 +21,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",
+    "negotiator": "^1.0.0",
     "next": "15.1.0",
+    "next-intl": "^3.26.5",
     "next-themes": "^0.4.4",
     "prettier-plugin-merge": "^0.7.2",
     "qs": "^6.13.1",
@@ -38,6 +41,7 @@
     "@eslint/eslintrc": "^3",
     "@trivago/prettier-plugin-sort-imports": "^5.2.0",
     "@types/jest": "^29.5.14",
+    "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/qs": "^6.9.17",
     "@types/react": "^19",

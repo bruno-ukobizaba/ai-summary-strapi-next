@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function LanguageSwitcher() {
   const router = useRouter();
@@ -19,8 +19,9 @@ export function LanguageSwitcher() {
     }
   }, []);
 
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = e.target.value;
+  const switchLanguage = (newLocale: string) => {
+    if (newLocale === locale) return; // Don't do anything if the locale is the same
+
     console.log("Language changed to:", newLocale);
 
     const path = window.location.pathname;
@@ -34,24 +35,33 @@ export function LanguageSwitcher() {
       pathParts[1] = newLocale;
       const newPath = pathParts.join("/");
       console.log("Navigating to:", newPath);
-      router.push(newPath);
+      window.location.href = newPath; // Use direct navigation instead of router
     } else {
       const newPath = `/${newLocale}${path}`;
       console.log("Navigating to:", newPath);
-      router.push(newPath);
+      window.location.href = newPath; // Use direct navigation instead of router
     }
   };
 
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm text-gray-500">Language:</span>
-      <select
-        onChange={handleChange}
-        className="bg-transparent border-none focus:ring-0"
-        value={locale}>
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-      </select>
+      <div className="flex gap-2">
+        <button
+          onClick={() => switchLanguage("en")}
+          className={`px-2 py-1 text-sm rounded ${
+            locale === "en" ? "bg-gray-200" : "hover:bg-gray-100"
+          }`}>
+          English
+        </button>
+        <button
+          onClick={() => switchLanguage("fr")}
+          className={`px-2 py-1 text-sm rounded ${
+            locale === "fr" ? "bg-gray-200" : "hover:bg-gray-100"
+          }`}>
+          Français
+        </button>
+      </div>
     </div>
   );
 }
